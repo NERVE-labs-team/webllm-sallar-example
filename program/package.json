@@ -1,0 +1,22 @@
+{
+  "name": "webllm-sallar-example_program",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --outfile=../public/index.js --format=iife --minify",
+    "dev": "esbuild src/index.ts --bundle --outfile=../public/index.js --format=iife --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@mlc-ai/web-llm": "^0.2.79",
+    "@sallar-network/client": "^1.0.1",
+    "socket.io-client": "^4.8.1",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.5"
+  }
+}
