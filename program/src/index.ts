@@ -10,7 +10,7 @@ import { ExecutePrompt, PromptResponse } from '@shared/prompts';
 
   // Download model
 
-  const selectedModel = 'Qwen2.5-0.5B-Instruct-q4f16_1-MLC';
+  const selectedModel = 'Llama-3.1-8B-Instruct-q4f16_1-MLC';
 
   const initProgressCallback = (initProgress: any) => {
     console.log(initProgress);
