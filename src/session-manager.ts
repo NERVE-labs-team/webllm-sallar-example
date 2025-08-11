@@ -32,10 +32,14 @@ export class SessionManager {
   // Workers
 
   addWorker(worker_id: string): void {
+    console.log(`worker_id: ${worker_id}`);
+
     this.availableWorkers.add(worker_id);
   }
 
   removeWorker(worker_id: string): void {
+    console.log(`removeWorker: ${worker_id}`);
+
     this.availableWorkers.delete(worker_id);
     const session = this.getSessionByWorkerId(worker_id);
     if (session) {
@@ -47,6 +51,8 @@ export class SessionManager {
   // Sessions
 
   async createSession(socket: Socket): Promise<string> {
+    console.log(`createSession: ${socket.id}`);
+
     const freeWorker = take(this.availableWorkers);
     if (!freeWorker) throw new Error('There is no available workers');
     this.sessions.push({ worker_id: freeWorker, socket });
@@ -55,6 +61,8 @@ export class SessionManager {
   }
 
   closeSession(socket_id: string): void {
+    console.log(`closeSession: ${socket_id}`);
+
     const session = this.getSessionBySocketId(socket_id);
     if (session) {
       this.removeSessionBySocketId(socket_id);
@@ -65,6 +73,8 @@ export class SessionManager {
   // Prompts
 
   async executePrompt(socket_id: string, prompt: string): Promise<void> {
+    console.log(`executePrompt: ${socket_id}`);
+
     const session = this.getSessionBySocketId(socket_id);
     if (!session) throw new Error('Cannot execute prompt');
 
@@ -75,20 +85,28 @@ export class SessionManager {
   // Utils
 
   private getSessionBySocketId(socket_id: string): Session | undefined {
+    console.log(`getSessionBySocketId: ${socket_id}`);
+
     return this.sessions.find((session) => session.socket.id === socket_id);
   }
 
   private getSessionByWorkerId(worker_id: string): Session | undefined {
+    console.log(`getSessionByWorkerId: ${worker_id}`);
+
     return this.sessions.find((session) => session.worker_id === worker_id);
   }
 
   private removeSessionBySocketId(socket_id: string): void {
+    console.log(`removeSessionBySocketId: ${socket_id}`);
+
     this.sessions = this.sessions.filter(
       (session) => session.socket.id !== socket_id
     );
   }
 
   private removeSessionByWorkerId(worker_id: string): void {
+    console.log(`removeSessionByWorkerId: ${worker_id}`);
+
     this.sessions = this.sessions.filter(
       (session) => session.worker_id !== worker_id
     );
